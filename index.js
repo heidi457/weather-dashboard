@@ -44,7 +44,7 @@ function coordinatesApiCall() {
             let latt = data.coord.lat;
             callWeatherApi(long, latt);
             document.getElementById("city").textContent = data.name;
-            let locationTimezone = document.querySelector(".location-timezone");
+            let locationTimezone = document.querySelector("locationtimezone");
         console.log(data);
         });
 }
@@ -59,9 +59,20 @@ function callWeatherApi(lon, lat) {
         document.getElementById("wind").textContent= data.current.wind_speed;
         document.getElementById("humidity").textContent= data.current.humidity;
         document.getElementById("uv").textContent= data.current.uvi;
-        document.getElementById("weather").textContent= data.weather[0].description;
+        // document.getElementById("weather").textContent= data.current.weather[0].description;
+
 
         console.log(data);
+
+        //loop through this for each day to get it instead. Day 0 is today.
+        let unix_timestamp = data.daily[0].dt
+        // Create a new JavaScript Date object based on the timestamp
+        // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+        var date = new Date(unix_timestamp * 1000);
+        var formattedTime = date;
+        console.log(formattedTime);
+
+        
     });
 }
 
@@ -95,19 +106,19 @@ document.getElementById("btn").addEventListener("click", function (event) {
 
 
 
-if(storageInput) {
-    text.textContent = storedInput
-}
+// if(storageInput) {
+//     text.textContent = storedInput
+// }
 
-storageInput.addEventListener('input', letter => {
-    text.textContent = letter.target.value
-})
+// storageInput.addEventListener('input', letter => {
+//     text.textContent = letter.target.value
+// })
 
-const saveToLocalStorage = () => {
-    localStorage.setItem('textinput', text.textContent)
-}
+// const saveToLocalStorage = () => {
+//     localStorage.setItem('textinput', text.textContent)
+// }
 
-button.addEventListener('click', saveToLocalStorage)
+// button.addEventListener('click', saveToLocalStorage)
 
 
 
